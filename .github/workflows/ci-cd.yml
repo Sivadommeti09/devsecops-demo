@@ -79,7 +79,7 @@ jobs:
     needs: [build]
     env:
       REGISTRY: ghcr.io
-      IMAGE_NAME: sivadommeti09/devsecops-demo
+      IMAGE_NAME: ${{ github.repository }}
     outputs:
       image_tag: ${{ steps.set_output.outputs.image_tag }}
     steps:
@@ -106,7 +106,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: Sivadommeti09/devsecops-demo
+          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
           tags: |
             type=sha,format=long
             type=ref,event=branch
@@ -120,6 +120,7 @@ jobs:
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{ steps.meta.outputs.labels }}
           load: true
+    
       
       - name: Push Docker image
         uses: docker/build-push-action@v5
