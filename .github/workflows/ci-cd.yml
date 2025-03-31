@@ -106,7 +106,7 @@ jobs:
         id: meta
         uses: docker/metadata-action@v5
         with:
-          images: ${{ env.REGISTRY }}/${{ env.IMAGE_NAME }}
+          images: Sivadommeti09/devsecops-demo
           tags: |
             type=sha,format=long
             type=ref,event=branch
